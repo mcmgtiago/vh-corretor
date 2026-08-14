@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { FadeUp, GridPattern } from "@/components/Animations"
 
 const steps = [
@@ -63,7 +63,30 @@ const steps = [
 ]
 
 export function HowItWorks() {
-  const [openIndex, setOpenIndex] = useState(0)
+  const [activeIndex, setActiveIndex] = useState(-1)
+  const stepsRef = useRef<(HTMLDivElement | null)[]>([])
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = []
+
+    stepsRef.current.forEach((el, index) => {
+      if (!el) return
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActiveIndex((prev) => Math.max(prev, index))
+            }
+          })
+        },
+        { threshold: 0.6 }
+      )
+      observer.observe(el)
+      observers.push(observer)
+    })
+
+    return () => observers.forEach((o) => o.disconnect())
+  }, [])
 
   return (
     <section id="como-funciona" className="relative bg-white py-20 lg:py-28">
@@ -98,36 +121,39 @@ export function HowItWorks() {
         <FadeUp delay={0.2}>
           <div className="mt-14">
           {steps.map((step, index) => {
-            const isOpen = openIndex === index
-            const isCompleted = index < openIndex
+            const isActive = index <= activeIndex
+            const isCurrentlyRevealing = index === activeIndex
 
             return (
-              <div key={step.number} className="relative">
+              <div
+                key={step.number}
+                ref={(el) => { stepsRef.current[index] = el }}
+                className="relative"
+              >
                 {/* Connector line */}
                 {index < steps.length - 1 && (
                   <div
-                    className={`absolute left-[19px] top-[48px] h-[calc(100%-48px)] w-[2px] transition-colors duration-300 ${
-                      isCompleted ? "bg-[#1c2340]" : "bg-gray-200"
+                    className={`absolute left-[19px] top-[48px] h-[calc(100%-48px)] w-[2px] transition-all duration-700 ${
+                      isActive ? "bg-[#1c2340]" : "bg-gray-200"
                     }`}
                   />
                 )}
 
                 {/* Step */}
-                <button
-                  onClick={() => setOpenIndex(index)}
-                  className="group flex w-full items-start gap-5 py-5 text-left transition-all"
+                <div
+                  className={`group flex w-full items-start gap-5 py-5 text-left transition-all duration-500 ${
+                    isActive ? "opacity-100 translate-y-0" : "opacity-30 translate-y-2"
+                  }`}
                 >
                   {/* Icon circle */}
                   <div
-                    className={`relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-300 ${
-                      isOpen
-                        ? "border-[#1c2340] bg-[#1c2340] text-white"
-                        : isCompleted
-                        ? "border-[#1c2340] bg-[#1c2340] text-white"
-                        : "border-gray-200 bg-white text-gray-400 group-hover:border-gray-300"
+                    className={`relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-500 ${
+                      isActive
+                        ? "border-[#1c2340] bg-[#1c2340] text-white scale-100"
+                        : "border-gray-200 bg-white text-gray-400 scale-90"
                     }`}
                   >
-                    {isCompleted && !isOpen ? (
+                    {isActive && !isCurrentlyRevealing ? (
                       <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                       </svg>
@@ -144,17 +170,19 @@ export function HowItWorks() {
                       </span>
                     </div>
                     <h3
-                      className={`mt-1 text-[15px] font-semibold transition-colors ${
-                        isOpen ? "text-[#1c2340]" : "text-gray-700 group-hover:text-[#1c2340]"
+                      className={`mt-1 text-[15px] font-semibold transition-colors duration-300 ${
+                        isActive ? "text-[#1c2340]" : "text-gray-400"
                       }`}
                     >
                       {step.title}
                     </h3>
 
-                    {/* Expandable content */}
+                    {/* Expandable content — reveals on scroll */}
                     <div
-                      className={`grid transition-all duration-300 ease-in-out ${
-                        isOpen ? "mt-2 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                      className={`grid transition-all duration-500 ease-in-out ${
+                        isCurrentlyRevealing
+                          ? "mt-2 grid-rows-[1fr] opacity-100"
+                          : "grid-rows-[0fr] opacity-0"
                       }`}
                     >
                       <div className="overflow-hidden">
@@ -165,11 +193,11 @@ export function HowItWorks() {
                     </div>
                   </div>
 
-                  {/* Expand indicator */}
+                  {/* Chevron */}
                   <div className="shrink-0 pt-2">
                     <svg
                       className={`h-4 w-4 text-gray-400 transition-transform duration-300 ${
-                        isOpen ? "rotate-180" : ""
+                        isCurrentlyRevealing ? "rotate-180" : ""
                       }`}
                       fill="none"
                       stroke="currentColor"
@@ -178,11 +206,11 @@ export function HowItWorks() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </div>
-                </button>
+                </div>
               </div>
             )
           })}
-          </div>
+        </div>
         </FadeUp>
       </div>
     </section>
