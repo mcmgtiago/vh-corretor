@@ -11,14 +11,100 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "VH Corretor | Imóveis de Médio e Alto Padrão em Recife",
   description:
-    "Apartamentos, casas e coberturas nas melhores localizações de Recife e região metropolitana. Atendimento direto e personalizado.",
+    "Corretor de imóveis em Recife especializado em médio e alto padrão. Apartamentos, casas e coberturas em Boa Viagem, Setúbal, Pina e região. CRECI-PE 22316 F. Atendimento direto e personalizado via WhatsApp.",
   keywords: [
     "imóveis recife",
     "corretor recife",
     "apartamento boa viagem",
     "imóveis alto padrão recife",
     "comprar apartamento recife",
+    "alugar apartamento recife",
+    "corretor de imóveis recife",
+    "VH Corretor",
+    "imóveis setúbal",
+    "imóveis pina",
+    "apartamento alto padrão boa viagem",
+    "casas recife",
+    "cobertura recife",
+    "CRECI-PE 22316",
+    "imóveis médio padrão recife",
+    "corretor boa viagem",
   ],
+  authors: [{ name: "VH Corretor", url: "https://vhcorretor.com.br" }],
+  creator: "VH Corretor",
+  publisher: "VH Corretor",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: "https://vhcorretor.com.br",
+    siteName: "VH Corretor",
+    title: "VH Corretor | Imóveis de Médio e Alto Padrão em Recife",
+    description:
+      "Encontre seu imóvel ideal em Recife. Apartamentos, casas e coberturas nas melhores localizações. Atendimento direto com quem conhece cada metro quadrado.",
+    images: [
+      {
+        url: "/hero-bg.jpg",
+        width: 1200,
+        height: 630,
+        alt: "VH Corretor - Imóveis em Recife",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "VH Corretor | Imóveis de Médio e Alto Padrão em Recife",
+    description:
+      "Encontre seu imóvel ideal em Recife. Apartamentos, casas e coberturas nas melhores localizações.",
+    images: ["/hero-bg.jpg"],
+  },
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
+  alternates: {
+    canonical: "https://vhcorretor.com.br",
+  },
+  category: "Real Estate",
+}
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  name: "VH Corretor",
+  description:
+    "Corretor de imóveis em Recife especializado em médio e alto padrão. Apartamentos, casas e coberturas em Boa Viagem, Setúbal, Pina e região.",
+  url: "https://vhcorretor.com.br",
+  telephone: "+5581996779692",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Recife",
+    addressRegion: "PE",
+    addressCountry: "BR",
+  },
+  areaServed: {
+    "@type": "City",
+    name: "Recife",
+  },
+  priceRange: "$$$ - $$$$",
+  sameAs: ["https://www.instagram.com/_vh.corretor"],
+  image: "/hero-bg.jpg",
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    opens: "08:00",
+    closes: "20:00",
+  },
 }
 
 export default function RootLayout({
@@ -29,46 +115,28 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={jakarta.variable}>
       <head>
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
+        <meta name="theme-color" content="#1c2340" />
+        <meta name="google-site-verification" content="" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              // Disable right-click
               document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-
-              // Disable keyboard shortcuts
               document.addEventListener('keydown', function(e) {
-                // Ctrl+U (view source)
                 if (e.ctrlKey && e.key === 'u') { e.preventDefault(); }
-                // Ctrl+Shift+I (dev tools)
                 if (e.ctrlKey && e.shiftKey && e.key === 'I') { e.preventDefault(); }
-                // Ctrl+Shift+J (console)
                 if (e.ctrlKey && e.shiftKey && e.key === 'J') { e.preventDefault(); }
-                // Ctrl+Shift+C (inspect)
                 if (e.ctrlKey && e.shiftKey && e.key === 'C') { e.preventDefault(); }
-                // F12
                 if (e.key === 'F12') { e.preventDefault(); }
-                // Ctrl+S (save)
                 if (e.ctrlKey && e.key === 's') { e.preventDefault(); }
-                // Ctrl+C (copy) — optional, can be annoying
-                // if (e.ctrlKey && e.key === 'c') { e.preventDefault(); }
               });
-
-              // Disable text selection
               document.addEventListener('selectstart', function(e) { e.preventDefault(); });
-
-              // Disable drag
               document.addEventListener('dragstart', function(e) { e.preventDefault(); });
-
-              // Detect DevTools open (basic)
-              (function() {
-                var threshold = 160;
-                setInterval(function() {
-                  if (window.outerWidth - window.innerWidth > threshold ||
-                      window.outerHeight - window.innerHeight > threshold) {
-                    document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;"><h1>⚠️ DevTools detectado</h1></div>';
-                  }
-                }, 1000);
-              })();
             `,
           }}
         />
