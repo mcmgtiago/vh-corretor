@@ -1,3 +1,7 @@
+"use client"
+
+import { StaggerContainer, StaggerItem, TiltCard, DotPattern } from "@/components/Animations"
+
 const properties = [
   {
     id: 1,
@@ -69,8 +73,9 @@ const properties = [
 
 export function PropertiesGrid() {
   return (
-    <section id="imoveis" className="bg-white py-20 lg:py-28">
-      <div className="mx-auto max-w-[1200px] px-8 lg:px-10">
+    <section id="imoveis" className="relative bg-white py-20 lg:py-28">
+      <DotPattern className="text-[#1c2340]" />
+      <div className="relative mx-auto max-w-[1200px] px-8 lg:px-10">
         {/* Header */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -93,61 +98,63 @@ export function PropertiesGrid() {
         </div>
 
         {/* Grid — 3 columns */}
-        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <StaggerContainer className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {properties.map((property) => (
-            <div key={property.id} className="group cursor-pointer">
-              {/* Image */}
-              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-                <img
-                  src={property.image}
-                  alt={property.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-                {/* Badge */}
-                <div className="absolute left-4 top-4">
-                  <span className="rounded-full border border-white/50 bg-white/90 px-3.5 py-1.5 text-[11px] font-semibold text-[#1c2340] backdrop-blur-sm">
-                    {property.type}
-                  </span>
-                </div>
-              </div>
-
-              {/* Info — below image */}
-              <div className="mt-4">
-                {/* Amenities row */}
-                <div className="flex items-center gap-3 text-[12px] text-gray-500">
-                  <span className="flex items-center gap-1">
-                    <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5M3.75 3v18m16.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
-                    </svg>
-                    {property.bedrooms} Quartos
-                  </span>
-                  <span className="text-gray-300">·</span>
-                  <span className="flex items-center gap-1">
-                    <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    {property.bathrooms} Banheiros
-                  </span>
-                  <span className="text-gray-300">·</span>
-                  <span>{property.area}</span>
+            <StaggerItem key={property.id}>
+              <TiltCard className="group h-full cursor-pointer">
+                {/* Image */}
+                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+                  <img
+                    src={property.image}
+                    alt={property.title}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  {/* Badge */}
+                  <div className="absolute left-4 top-4">
+                    <span className="rounded-full border border-white/50 bg-white/90 px-3.5 py-1.5 text-[11px] font-semibold text-[#1c2340] backdrop-blur-sm">
+                      {property.type}
+                    </span>
+                  </div>
                 </div>
 
-                {/* Title */}
-                <h3 className="mt-2 text-[15px] font-semibold text-[#1c2340] group-hover:underline">
-                  {property.title}
-                </h3>
+                {/* Info — below image */}
+                <div className="mt-4">
+                  {/* Amenities row */}
+                  <div className="flex items-center gap-3 text-[12px] text-gray-500">
+                    <span className="flex items-center gap-1">
+                      <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5M3.75 3v18m16.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+                      </svg>
+                      {property.bedrooms} Quartos
+                    </span>
+                    <span className="text-gray-300">·</span>
+                    <span className="flex items-center gap-1">
+                      <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      {property.bathrooms} Banheiros
+                    </span>
+                    <span className="text-gray-300">·</span>
+                    <span>{property.area}</span>
+                  </div>
 
-                {/* Price + location */}
-                <div className="mt-1.5 flex items-center gap-2 text-[13px]">
-                  <span className="font-bold text-[#1c2340]">{property.price}</span>
-                  <span className="text-gray-300">·</span>
-                  <span className="text-gray-500">{property.location}</span>
+                  {/* Title */}
+                  <h3 className="mt-2 text-[15px] font-semibold text-[#1c2340] group-hover:underline">
+                    {property.title}
+                  </h3>
+
+                  {/* Price + location */}
+                  <div className="mt-1.5 flex items-center gap-2 text-[13px]">
+                    <span className="font-bold text-[#1c2340]">{property.price}</span>
+                    <span className="text-gray-300">·</span>
+                    <span className="text-gray-500">{property.location}</span>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </TiltCard>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   )

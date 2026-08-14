@@ -1,3 +1,7 @@
+"use client"
+
+import { FadeUp, StaggerContainer, StaggerItem, WaveBackground } from "@/components/Animations"
+
 export function Testimonials() {
   const testimonials = [
     {
@@ -33,66 +37,73 @@ export function Testimonials() {
   ]
 
   return (
-    <section id="depoimentos" className="bg-white py-20 lg:py-28">
-      <div className="mx-auto max-w-[1200px] px-8 lg:px-10">
+    <section id="depoimentos" className="relative bg-white py-20 lg:py-28">
+      <WaveBackground />
+      <div className="relative mx-auto max-w-[1200px] px-8 lg:px-10">
         {/* Header */}
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-[#1c2340]">
-            O que dizem meus clientes
-          </h2>
-          <p className="mt-3 text-[15px] text-gray-500">
-            Mais de 150 negociações concluídas com satisfação.
-          </p>
-        </div>
+        <FadeUp>
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-[#1c2340]">
+              O que dizem meus clientes
+            </h2>
+            <p className="mt-3 text-[15px] text-gray-500">
+              Mais de 150 negociações concluídas com satisfação.
+            </p>
+          </div>
+        </FadeUp>
 
         {/* Grid — asymmetric like Tailark */}
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2">
+        <StaggerContainer className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2">
           {/* Featured card — spans 2 rows */}
-          <div className="rounded-2xl bg-gray-50 p-6 sm:col-span-2 sm:p-8 lg:row-span-2">
-            <blockquote className="flex h-full flex-col justify-between gap-8">
-              <p className="text-lg font-medium leading-relaxed text-[#1c2340] sm:text-xl">
-                &ldquo;{testimonials[0].quote}&rdquo;
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#1c2340] text-sm font-bold text-white">
-                  {testimonials[0].name.charAt(0)}
-                </div>
-                <div>
-                  <cite className="text-sm font-semibold not-italic text-[#1c2340]">
-                    {testimonials[0].name}
-                  </cite>
-                  <span className="block text-[13px] text-gray-500">
-                    {testimonials[0].role}
-                  </span>
-                </div>
-              </div>
-            </blockquote>
-          </div>
-
-          {/* Smaller cards */}
-          {testimonials.slice(1).map((t, i) => (
-            <div key={i} className="rounded-2xl bg-gray-50 p-6 lg:col-span-2">
-              <blockquote className="flex h-full flex-col justify-between gap-6">
-                <p className="text-[15px] leading-relaxed text-gray-700">
-                  &ldquo;{t.quote}&rdquo;
+          <StaggerItem className="sm:col-span-2 lg:row-span-2">
+            <div className="h-full rounded-2xl bg-gray-50 p-6 sm:p-8">
+              <blockquote className="flex h-full flex-col justify-between gap-8">
+                <p className="text-lg font-medium leading-relaxed text-[#1c2340] sm:text-xl">
+                  &ldquo;{testimonials[0].quote}&rdquo;
                 </p>
                 <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1c2340]/10 text-xs font-bold text-[#1c2340]">
-                    {t.name.charAt(0)}
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#1c2340] text-sm font-bold text-white">
+                    {testimonials[0].name.charAt(0)}
                   </div>
                   <div>
-                    <cite className="text-[13px] font-semibold not-italic text-[#1c2340]">
-                      {t.name}
+                    <cite className="text-sm font-semibold not-italic text-[#1c2340]">
+                      {testimonials[0].name}
                     </cite>
-                    <span className="block text-[12px] text-gray-500">
-                      {t.role}
+                    <span className="block text-[13px] text-gray-500">
+                      {testimonials[0].role}
                     </span>
                   </div>
                 </div>
               </blockquote>
             </div>
+          </StaggerItem>
+
+          {/* Smaller cards */}
+          {testimonials.slice(1).map((t, i) => (
+            <StaggerItem key={i} className="lg:col-span-2">
+              <div className="h-full rounded-2xl bg-gray-50 p-6">
+                <blockquote className="flex h-full flex-col justify-between gap-6">
+                  <p className="text-[15px] leading-relaxed text-gray-700">
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1c2340]/10 text-xs font-bold text-[#1c2340]">
+                      {t.name.charAt(0)}
+                    </div>
+                    <div>
+                      <cite className="text-[13px] font-semibold not-italic text-[#1c2340]">
+                        {t.name}
+                      </cite>
+                      <span className="block text-[12px] text-gray-500">
+                        {t.role}
+                      </span>
+                    </div>
+                  </div>
+                </blockquote>
+              </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   )

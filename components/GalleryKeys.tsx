@@ -1,3 +1,7 @@
+"use client"
+
+import { FadeUp, StaggerContainer, StaggerItem, DotPattern } from "@/components/Animations"
+
 export function GalleryKeys() {
   const photos = [
     {
@@ -27,35 +31,37 @@ export function GalleryKeys() {
   ]
 
   return (
-    <section className="bg-white py-20 lg:py-28">
-      <div className="mx-auto max-w-[1200px] px-8 lg:px-10">
+    <section className="relative bg-white py-20 lg:py-28">
+      <DotPattern className="text-[#1c2340]" />
+      <div className="relative mx-auto max-w-[1200px] px-8 lg:px-10">
         {/* Header */}
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-[#1c2340]">
-            Momentos que importam
-          </h2>
-          <p className="mt-3 text-[15px] text-gray-500">
-            Cada chave entregue é uma história de conquista.
-          </p>
-        </div>
+        <FadeUp>
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-[#1c2340]">
+              Momentos que importam
+            </h2>
+            <p className="mt-3 text-[15px] text-gray-500">
+              Cada chave entregue é uma história de conquista.
+            </p>
+          </div>
+        </FadeUp>
 
         {/* Grid — masonry style */}
-        <div className="mt-12 columns-2 gap-4 sm:columns-3">
+        <StaggerContainer className="mt-12 columns-2 gap-4 sm:columns-3">
           {photos.map((photo, i) => (
-            <div
-              key={i}
-              className="mb-4 overflow-hidden rounded-2xl"
-            >
-              <img
-                src={photo.src}
-                alt={photo.alt}
-                className="w-full object-cover transition-transform duration-500 hover:scale-105"
-                loading="lazy"
-                style={{ aspectRatio: i % 3 === 0 ? "3/4" : i % 2 === 0 ? "1/1" : "4/3" }}
-              />
-            </div>
+            <StaggerItem key={i} className="mb-4 break-inside-avoid">
+              <div className="overflow-hidden rounded-2xl">
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  className="w-full object-cover transition-transform duration-500 hover:scale-105"
+                  loading="lazy"
+                  style={{ aspectRatio: i % 3 === 0 ? "3/4" : i % 2 === 0 ? "1/1" : "4/3" }}
+                />
+              </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   )

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { GridPattern } from "@/components/Animations"
+import { FadeUp, GridPattern } from "@/components/Animations"
 
 const steps = [
   {
@@ -70,30 +70,33 @@ export function HowItWorks() {
       <GridPattern />
       <div className="mx-auto max-w-[1200px] px-8 lg:px-10">
         {/* Header */}
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <h2 className="text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-[#1c2340]">
-              Do primeiro contato às chaves na sua mão.
-            </h2>
-            <p className="mt-3 max-w-[500px] text-[15px] leading-relaxed text-gray-500">
-              Um processo simples, transparente e sem burocracia desnecessária.
-            </p>
+        <FadeUp>
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <h2 className="text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.15] text-[#1c2340]">
+                Do primeiro contato às chaves na sua mão.
+              </h2>
+              <p className="mt-3 max-w-[500px] text-[15px] leading-relaxed text-gray-500">
+                Um processo simples, transparente e sem burocracia desnecessária.
+              </p>
+            </div>
+            <a
+              href="https://wa.me/5581996779692?text=Ol%C3%A1%2C%20quero%20come%C3%A7ar%20a%20buscar%20um%20im%C3%B3vel"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-[#1c2340] px-7 py-3 text-[13px] font-semibold text-white transition-colors hover:bg-[#2a3558]"
+            >
+              Começar agora
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
           </div>
-          <a
-            href="https://wa.me/5581996779692?text=Ol%C3%A1%2C%20quero%20come%C3%A7ar%20a%20buscar%20um%20im%C3%B3vel"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-[#1c2340] px-7 py-3 text-[13px] font-semibold text-white transition-colors hover:bg-[#2a3558]"
-          >
-            Começar agora
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-        </div>
+        </FadeUp>
 
         {/* Timeline */}
-        <div className="mt-14">
+        <FadeUp delay={0.2}>
+          <div className="mt-14">
           {steps.map((step, index) => {
             const isOpen = openIndex === index
             const isCompleted = index < openIndex
@@ -179,7 +182,8 @@ export function HowItWorks() {
               </div>
             )
           })}
-        </div>
+          </div>
+        </FadeUp>
       </div>
     </section>
   )
