@@ -49,6 +49,8 @@ function CountingNumber({
   )
 }
 
+import { DotPattern } from "@/components/Animations"
+
 export function TrustBar() {
   const metrics = [
     { value: 230, suffix: "+", label: "Imóveis no portfólio" },
@@ -58,7 +60,8 @@ export function TrustBar() {
   ]
 
   return (
-    <section className="border-b border-gray-100 bg-white pt-16">
+    <section className="relative border-b border-gray-100 bg-white pt-16">
+      <DotPattern />
       <div className="mx-auto max-w-[1200px] px-8 pb-16 lg:px-10">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {metrics.map((metric) => (

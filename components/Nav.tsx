@@ -23,7 +23,9 @@ export function Nav() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-[#1c2340]/95 backdrop-blur-md shadow-lg" : "bg-transparent"
+        scrolled
+          ? "bg-[#1c2340]/95 backdrop-blur-md shadow-lg"
+          : "bg-[#1c2340]/70 backdrop-blur-sm"
       }`}
     >
       <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-8 lg:px-10">
@@ -32,7 +34,7 @@ export function Nav() {
           <img
             src="/logo-azul.png"
             alt="VH Corretor"
-            className={`h-7 transition-all ${scrolled ? "brightness-0 invert" : ""}`}
+            className="h-7 brightness-0 invert"
           />
         </a>
 

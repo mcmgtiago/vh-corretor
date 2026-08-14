@@ -5,17 +5,18 @@ import { Showcase } from "@/components/Showcase"
 import { PropertiesGrid } from "@/components/PropertiesGrid"
 import { HowItWorks } from "@/components/HowItWorks"
 import { AboutBroker } from "@/components/AboutBroker"
-import { TestimonialsMarquee } from "@/components/TestimonialsMarquee"
 import { Testimonials } from "@/components/Testimonials"
 import { GalleryKeys } from "@/components/GalleryKeys"
 import { MapCTA } from "@/components/MapCTA"
 import { FinalCTA } from "@/components/FinalCTA"
 import { Footer } from "@/components/Footer"
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp"
+import { CursorGlow } from "@/components/Animations"
 
 export default function Home() {
   return (
     <>
+      <CursorGlow />
       <Nav />
       <main>
         <Hero />
@@ -24,7 +25,6 @@ export default function Home() {
         <PropertiesGrid />
         <HowItWorks />
         <AboutBroker />
-        <TestimonialsMarquee />
         <Testimonials />
         <GalleryKeys />
         <MapCTA />

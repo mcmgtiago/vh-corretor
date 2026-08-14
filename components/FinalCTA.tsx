@@ -1,7 +1,10 @@
+import { GradientBlob } from "@/components/Animations"
+
 export function FinalCTA() {
   return (
-    <section className="border-t border-gray-100 bg-white py-20 lg:py-28">
-      <div className="mx-auto max-w-[1200px] px-8 lg:px-10">
+    <section className="relative overflow-hidden border-t border-gray-100 bg-gray-50 py-20 lg:py-28">
+      <GradientBlob className="inset-0" />
+      <div className="relative z-10 mx-auto max-w-[1200px] px-8 lg:px-10">
         <div className="mx-auto max-w-3xl text-center">
           {/* Badge */}
           <span className="inline-flex items-center gap-2 rounded-full border border-gray-200 px-4 py-1.5 text-[12px] font-medium text-gray-600">

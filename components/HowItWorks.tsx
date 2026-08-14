@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { GridPattern } from "@/components/Animations"
 
 const steps = [
   {
@@ -65,7 +66,8 @@ export function HowItWorks() {
   const [openIndex, setOpenIndex] = useState(0)
 
   return (
-    <section id="como-funciona" className="bg-white py-20 lg:py-28">
+    <section id="como-funciona" className="relative bg-white py-20 lg:py-28">
+      <GridPattern />
       <div className="mx-auto max-w-[1200px] px-8 lg:px-10">
         {/* Header */}
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
